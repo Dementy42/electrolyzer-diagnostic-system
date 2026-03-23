@@ -1,0 +1,134 @@
+{
+  "system_name": "Hydrogen Electrolyzer Diagnostics System",
+  "version": "1.0.0",
+  "created_date": "2025-11-24",
+  
+  "hardware": {
+    "board": "Arduino MEGA 2560",
+    "serial_baudrate": 9600,
+    "serial_timeout": 2.0
+  },
+  
+  "sensors": {
+    "pressure_pwm": {
+      "pin": "A0",
+      "type": "PWM Pressure Sensor",
+      "range_min": 0,
+      "range_max": 500,
+      "unit": "kPa",
+      "description": "Датчик давления в электролизере (0-500 кПа)"
+    },
+    "differential_pressure_start": {
+      "pin": "A1",
+      "type": "Differential Manometer HT-1890",
+      "range": 100,
+      "unit": "mbar (±100)",
+      "description": "Дифференциальный манометр в начале трубки"
+    },
+    "differential_pressure_end": {
+      "pin": "A2",
+      "type": "Differential Manometer HT-1890",
+      "range": 100,
+      "unit": "mbar (±100)",
+      "description": "Дифференциальный манометр в конце трубки"
+    },
+    "temperature": {
+      "pin": 10,
+      "type": "DS18B20 OneWire",
+      "unit": "°C",
+      "description": "Датчик температуры (с 4.7kΩ pull-up резистором)"
+    }
+  },
+  
+  "outputs": {
+    "pneumatic_valve": {
+      "pin": 22,
+      "type": "Digital Output",
+      "description": "Управление пневмоклапаном (через реле 24V)"
+    },
+    "system_relay": {
+      "pin": 24,
+      "type": "Digital Output",
+      "description": "Главное реле системы (включение/отключение)"
+    },
+    "status_led": {
+      "pin": 13,
+      "type": "Digital Output",
+      "description": "Встроенный LED на Arduino для индикации статуса"
+    }
+  },
+  
+  "working_pressures": {
+    "normal_pressure_min": 50,
+    "normal_pressure_max": 200,
+    "normal_pressure_nominal": 125,
+    "max_pressure_standard": 500,
+    "max_pressure_extended": 700,
+    "unit": "kPa"
+  },
+  
+  "tube_diagnostics": {
+    "normal_delta_p": 10,
+    "kink_threshold_light": 1.5,
+    "kink_threshold_medium": 2.0,
+    "kink_threshold_critical": 3.0,
+    "leak_minor_threshold": -0.3,
+    "leak_critical_threshold": -2.0,
+    "pressure_drop_critical": 0.6,
+    "unit": "kPa or ratio"
+  },
+  
+  "temperature_thresholds": {
+    "warning_high": 40,
+    "warning_low": 5,
+    "nominal": 25,
+    "unit": "°C"
+  },
+  
+  "sampling": {
+    "sampling_rate_normal": 1,
+    "sampling_rate_critical": 10,
+    "history_buffer_size": 10,
+    "unit": "Hz"
+  },
+  
+  "data_storage": {
+    "data_folder": "/project/data/",
+    "log_file": "system_log.txt",
+    "csv_file": "sensor_data.csv",
+    "excel_file": "sensor_data.xlsx",
+    "config_file": "system_config.json"
+  },
+  
+  "diagnostics": {
+    "tube_statuses": [
+      "НОРМА",
+      "ПЕРЕГИБ_ЛЕГКИЙ",
+      "ПЕРЕГИБ_СРЕДНИЙ",
+      "ПЕРЕГИБ_КРИТИЧЕСКИЙ",
+      "МИКРОРАЗРЫВ",
+      "РАЗРЫВ_ЧАСТИЧНЫЙ",
+      "РАЗРЫВ_ПОЛНЫЙ",
+      "НЕОПРЕДЕЛЕННОЕ"
+    ],
+    "severity_levels": [
+      "ИНФОРМАЦИЯ",
+      "ЛЕГКИЙ",
+      "СРЕДНИЙ",
+      "КРИТИЧЕСКИЙ"
+    ],
+    "system_statuses": [
+      "OK",
+      "ПРЕДУПРЕЖДЕНИЕ",
+      "КРИТИЧЕСКОЕ",
+      "ОФФЛАЙН"
+    ]
+  },
+  
+  "notes": {
+    "calibration": "Перед использованием система должна быть откалибрована в нормальных рабочих условиях",
+    "safety": "При критической ошибке система автоматически останавливается",
+    "data": "Все данные сохраняются в /project/data/ (текст, CSV, Excel)",
+    "serial": "Убедитесь, что Arduino подключена и прошивка загружена перед запуском Python скрипта"
+  }
+}

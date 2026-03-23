@@ -1,0 +1,25 @@
+# ЗАВИСИМОСТИ ПРОЕКТА
+# Hydrogen Electrolyzer Diagnostics System
+# Requirements for Python 3.7+
+
+# Работа с Serial портом Arduino
+pyserial==3.5
+
+# Работа с Excel файлами
+openpyxl==3.10.1
+
+# Опциональные пакеты для расширенного функционала
+numpy==1.24.3              # Для расширенных математических операций
+scipy==1.11.0              # Для обработки сигналов (фильтрация, спектральный анализ)
+pandas==2.0.3              # Для обработки больших объемов данных
+matplotlib==3.7.1          # Для графической визуализации данных
+
+# Примечание: 
+# - pyserial и openpyxl являются ОБЯЗАТЕЛЬНЫМИ
+# - numpy, scipy, pandas, matplotlib опциональны (для расширенного анализа)
+# 
+# Для установки ТОЛЬКО ОБЯЗАТЕЛЬНЫХ пакетов:
+#   pip install pyserial openpyxl
+#
+# Для полной установки (с опциональными):
+#   pip install -r requirements.txt
